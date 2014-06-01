@@ -1,0 +1,23 @@
+<?php
+
+/*
+ * Implements hook_form_alter
+ */
+	function preselect_nightly_promo_days_form_alter (&$form, &$form_state, $form_id) {
+		#krumo($form_id);
+		switch ($form_id) {
+			case 'friday_promotions_node_form' :
+			  $element['weekly']['BYDAY'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Repeat on YOU DID IT!', array(), array('context' => 'Date repeat')),
+    '#default_value' => !empty($rrule['BYDAY']) && $rrule['FREQ'] === 'WEEKLY' ? $rrule['BYDAY'] : array(),
+    '#options' => $options,
+    '#attributes' => array('class' => array('container-inline byday')),
+    '#multiple' => TRUE,
+    '#prefix' => '<div class="date-clear">',
+    '#suffix' => '</div>',
+  );
+
+			break;
+		}
+	};
